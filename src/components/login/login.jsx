@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { Form, Button } from "react-bootstrap";
 
 class Login extends Component {
-  state = {};
+  state = {
+    user: { email: "", password: "" },
+    errors: {}
+  };
   loginStyle = {
     width: "35%",
     minHeight: "300px",
@@ -14,6 +17,14 @@ class Login extends Component {
   handleSubmit = event => {
     event.preventDefault();
     console.log("Submit button clicked");
+  };
+
+  // handle change
+  handleChange = ({ currentTarget: input }) => {
+    const user = { ...this.state.user };
+    console.log("handle change called");
+    user[input.name] = input.value;
+    this.setState({ user });
   };
 
   formStyle = {};
@@ -29,6 +40,7 @@ class Login extends Component {
                 type="email"
                 placeholder="Enter email"
                 name="email"
+                onChange={this.handleChange}
               />
               <Form.Text className="text-muted">
                 We'll never share your email with anyone else.
@@ -37,7 +49,11 @@ class Login extends Component {
 
             <Form.Group controlId="password">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                onChange={this.handleChange}
+              />
             </Form.Group>
             <Form.Group controlId="formCheckBox">
               <Form.Check type="checkbox" label="Check me out" />

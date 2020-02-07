@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
+// import "@appbaseio/reactivesearch/dist/css/style.min.css";
 
 ReactDOM.render(<App />, document.getElementById("root"));
 

@@ -12,14 +12,20 @@ function NavBarComponent() {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link as={Link} to="/">
-            Home
+            HOME
           </Nav.Link>
           <Nav.Link to="" as={Link}>
-            Link
+            WHAT WE DO?
           </Nav.Link>
 
           <Nav.Link to="" as={Link}>
-            Link
+            ABOUT US
+          </Nav.Link>
+          <Nav.Link to="" as={Link}>
+            LATEST EVENTS
+          </Nav.Link>
+          <Nav.Link to="" as={Link}>
+            GET EVENT REGISTER
           </Nav.Link>
         </Nav>
         {/* right section */}

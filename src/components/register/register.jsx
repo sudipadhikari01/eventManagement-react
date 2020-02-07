@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import { Form, Button } from "react-bootstrap";
 import Joi from "joi-browser";
+// import { Redirect } from "react-router-dom";
+import axios from "axios";
 
 class Register extends Component {
   state = {
     register: { username: "", email: "", password: "", confirmPassword: "" },
-    errors: {}
+    errors: {},
+    isError: false,
+    data: {}
   };
 
   schema = {
@@ -25,7 +29,6 @@ class Register extends Component {
       .min(8)
       .required()
       .label("Confirm Password")
-      .valid(Joi.ref("password"))
   };
 
   registerStyle = {
@@ -33,15 +36,6 @@ class Register extends Component {
     minHeight: "300px",
     margin: "0 auto",
     paddingTop: "5%"
-  };
-
-  handleSubmit = event => {
-    event.preventDefault();
-    console.log("form submitted");
-    const errors = this.joiValidate();
-    if (errors) {
-      this.setState({ errors });
-    }
   };
 
   handleChange = ({ currentTarget: input }) => {
@@ -84,6 +78,52 @@ class Register extends Component {
     return errors;
   };
 
+  // fetching api
+
+  saveToDB = async () => {};
+
+  // async componentDidMount() {}
+
+  handleSubmit = async event => {
+    event.preventDefault();
+    console.log("form submitted");
+    const errors = this.joiValidate();
+    if (errors) {
+      this.setState({ errors });
+    } else {
+      const userPost = {
+        name: this.state.register.username,
+        email: this.state.register.email,
+        password: this.state.register.password,
+        confirmPassword: this.state.register.confirmPassword
+      };
+      await axios
+        .post("http://localhost:8080/api/register", userPost)
+        .then(response => {
+          // this.setState({ isError: false, response });
+          console.log(response.data);
+          this.setState({ isError: false });
+          this.setState({ data: response.data });
+        })
+        .catch(error => {
+          console.log("error calling the api " + error);
+          this.setState({ isError: true, data: null });
+        });
+
+      console.log("Errror:" + this.state.isError);
+      console.log("Message: " + this.state.data.message);
+
+      if (
+        this.state.isError === false &&
+        this.state.data.message === "New user created"
+      ) {
+        this.props.history.push("/login");
+      }
+
+      // return <Redirect to="/login" />;
+    }
+  };
+
   render() {
     return (
       <div className="cotainer">
@@ -96,6 +136,7 @@ class Register extends Component {
                 type="text"
                 placeholder="Enter name"
                 name="username"
+                value={this.state.register.username}
                 onChange={this.handleChange}
               />
               {this.state.errors.username && (
@@ -111,6 +152,7 @@ class Register extends Component {
                 type="email"
                 placeholder="Enter email"
                 name="email"
+                value={this.state.register.email}
                 onChange={this.handleChange}
               />
 
@@ -127,6 +169,7 @@ class Register extends Component {
                 type="password"
                 placeholder="Password"
                 name="password"
+                value={this.state.register.password}
                 onChange={this.handleChange}
               />
 
@@ -143,6 +186,7 @@ class Register extends Component {
                 type="password"
                 placeholder=" Confirm Password"
                 name="confirmPassword"
+                value={this.state.register.confirmPassword}
                 onChange={this.handleChange}
               />
               {this.state.errors.confirmPassword && (
