@@ -74,6 +74,7 @@ class Register extends Component {
 
     for (let item of result.error.details) {
       errors[item.path[0]] = item.message;
+      console.log(result);
     }
     return errors;
   };

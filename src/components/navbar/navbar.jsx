@@ -24,7 +24,7 @@ function NavBarComponent() {
           <Nav.Link to="/latest-event" as={Link}>
             LATEST EVENTS
           </Nav.Link>
-          <Nav.Link to="" as={Link}>
+          <Nav.Link to="/event-register" as={Link}>
             GET EVENT REGISTER
           </Nav.Link>
         </Nav>
