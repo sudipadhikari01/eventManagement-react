@@ -80,3 +80,25 @@ export const eventTypeOptions = [
   { value: "Tour", label: "Tour" },
   { value: "Tournament", label: "Tournament" }
 ];
+
+export const topicOptions = [
+  { value: "Auto,Boat & Air", label: "Auto,Boat & Air" },
+  { value: "Buisness & Professional", label: "Buisness and Professional" },
+  { value: "Charity & Causes", label: "Charity & Causes" },
+  { value: "Community & Culture", label: "Community & Culture" },
+  { value: "Family & Education", label: "Family & Education" },
+  { value: "Fashion & Beauty", label: "Fashion & Beauty" },
+  { value: "Film,Media & Entertaiment", label: "Film,Media & Entertaiment" },
+  { value: "Food & Drink", label: "Food & Drink" },
+  { value: "Goverment & Politics", label: "Goverment & Politics" },
+  { value: "Health & Wellness", label: "Health & Wellness" },
+  { value: "Hobbies & Special Interest", label: "Hobbies & Special Interest" },
+  { value: "Home & Lifestyle", label: "Home & Lifestyle" },
+  { value: "Music", label: "Music" },
+  { value: "Performing & Visual Arts", label: "Performing & Visual Arts" },
+  { value: "Religion & Spirituality", label: "Religion & Spirituality" },
+  { value: "School Activities", label: "School Activities" },
+  { value: "Science & Technology", label: "Science & Technology" },
+  { value: "Seasonal & Holiday", label: "Seasonal & Holiday" },
+  { value: "Other", label: "Other" }
+];

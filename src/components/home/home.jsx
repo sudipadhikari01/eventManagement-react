@@ -9,11 +9,7 @@ class Home extends Component {
     backgroundImage: `url(${BackgroundImage})`
   };
   render() {
-    return (
-      <div style={this.style}>
-        <h1>Home page</h1>
-      </div>
-    );
+    return <div style={this.style}></div>;
   }
 }
 
