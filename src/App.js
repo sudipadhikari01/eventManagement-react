@@ -8,6 +8,7 @@ import HomeComponent from "./components/home/home";
 import IndexComponent from "./components/index/index";
 import LatestEventComponent from "./components/latest-event/latest-event";
 import RegisterEventComponent from "./components/event-register/event-register";
+import AboutUsComponent from "./components/about-us/about-us";
 
 import "bootstrap/dist/css/bootstrap.css";
 
@@ -25,6 +26,7 @@ class App extends Component {
             <Route path="/index" component={IndexComponent} />
             <Route path="/latest-event" component={LatestEventComponent} />
             <Route path="/event-register" component={RegisterEventComponent} />
+            <Route path="/about-us" component={AboutUsComponent} />
             <Route path="/not-found" component={PageNotFoundComponent} />
             <Redirect to="/not-found" />
           </Switch>

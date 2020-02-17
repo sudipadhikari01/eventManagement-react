@@ -20,6 +20,7 @@ import CKEditor from "ckeditor4-react";
 class EventRegisterForm extends Component {
   state = {
     errors: {},
+    data: {},
     input: {
       eventTitle: "",
       eventLocation: "",
@@ -320,10 +321,17 @@ class EventRegisterForm extends Component {
     await axios
       .post("http://localhost:8080/api/event-registration", formData)
       .then(response => {
-        console.log("response from server is ", response);
+        console.log("response from server is ", response.data);
+        const data = response.data;
+        this.setState({ data });
+        console.log(this.state.data.message);
       });
+    if (this.state.data.message === "Event registered successfully") {
+      console.log("inside if");
+      this.props.history.push("/home");
+    }
 
-    console.log("form data is ", formData);
+    // console.log("form data is ", formData);
   };
 
   render() {

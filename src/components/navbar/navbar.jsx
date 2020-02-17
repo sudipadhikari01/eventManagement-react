@@ -18,7 +18,7 @@ function NavBarComponent() {
             WHAT WE DO?
           </Nav.Link>
 
-          <Nav.Link to="" as={Link}>
+          <Nav.Link to="/about-us" as={Link}>
             ABOUT US
           </Nav.Link>
           <Nav.Link to="/latest-event" as={Link}>
