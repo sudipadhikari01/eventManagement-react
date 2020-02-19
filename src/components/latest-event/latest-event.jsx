@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import BackgroundImage from "./images/event-background.jpg";
 import { Card, Button } from "react-bootstrap";
+import axios from "axios";
 
 class LatestEvent extends Component {
-  state = {};
+  state = {
+    events: []
+  };
   style = {
     backgroundStyle: {
       width: "100%",
@@ -15,6 +18,18 @@ class LatestEvent extends Component {
       headingStyle: { textAlign: "center" }
     }
   };
+
+  componentDidMount() {
+    axios.get("http://localhost:8080/api/event-registration").then(response => {
+      if (response.data.status === "success") {
+        console.log("response is ", response);
+        this.setState({ events: response.data.data });
+      }
+
+      // console.log("events is ", this.state.events[1].eventImage);
+    });
+  }
+
   render() {
     return (
       <div>
@@ -27,9 +42,9 @@ class LatestEvent extends Component {
             Latest Events
           </h2>
 
-          <div className="row">
-            <div className="col-md-4">
-              <Card style={{ width: "18rem" }}>
+          <div className="row" style={{ marginTop: "20px" }}>
+            <div className="col-md-4 col-sm-4">
+              <Card>
                 <Card.Img variant="top" src="holder.js/100px180" />
                 <Card.Body>
                   <Card.Title>Card Title</Card.Title>
@@ -42,9 +57,9 @@ class LatestEvent extends Component {
               </Card>
             </div>
 
-            <div className="col-md-4">
-              <Card style={{ width: "18rem" }}>
-                <Card.Img variant="top" src="holder.js/100px180" />
+            <div className="col-md-4 col-sm-4">
+              <Card>
+                <Card.Img variant="top" src="" />
                 <Card.Body>
                   <Card.Title>Card Title</Card.Title>
                   <Card.Text>
@@ -56,8 +71,8 @@ class LatestEvent extends Component {
               </Card>
             </div>
 
-            <div className="col-md-4">
-              <Card style={{ width: "18rem" }}>
+            <div className="col-md-4 col-sm-4">
+              <Card>
                 <Card.Img variant="top" src="holder.js/100px180" />
                 <Card.Body>
                   <Card.Title>Card Title</Card.Title>
@@ -70,6 +85,12 @@ class LatestEvent extends Component {
               </Card>
             </div>
           </div>
+
+          {/* <div>
+            {this.state.events && (
+              <input type="file" src={this.state.events[1].eventImage} />
+            )}
+          </div> */}
         </div>
       </div>
     );

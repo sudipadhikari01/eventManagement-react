@@ -255,7 +255,6 @@ class EventRegisterForm extends Component {
   //   handle form submit
   handleFormSubmit = async event => {
     event.preventDefault();
-    var image;
 
     var {
       eventTitle,
@@ -287,10 +286,12 @@ class EventRegisterForm extends Component {
       country = "";
       region = "";
     }
+    const fd = new FormData();
     if (eventImage) {
-      image = eventImage.name;
+      console.log("event image is " + eventImage);
+      // image = eventImage.name;
+      fd.append("image", eventImage, eventImage.name);
     } else {
-      image = "no image";
     }
 
     const formData = {
@@ -303,7 +304,7 @@ class EventRegisterForm extends Component {
       eventDate,
       eventFrom,
       eventTo,
-      image,
+      // image,
       eventDescription,
       organizerName,
       organizerDescription,
@@ -318,8 +319,9 @@ class EventRegisterForm extends Component {
       eventType,
       eventTopic
     };
+    fd.append("eventForm", formData);
     await axios
-      .post("http://localhost:8080/api/event-registration", formData)
+      .post("http://localhost:8080/api/event-registration", fd)
       .then(response => {
         console.log("response from server is ", response.data);
         const data = response.data;
@@ -328,7 +330,7 @@ class EventRegisterForm extends Component {
       });
     if (this.state.data.message === "Event registered successfully") {
       console.log("inside if");
-      this.props.history.push("/home");
+      // this.props.history.push("/home");
     }
 
     // console.log("form data is ", formData);
@@ -711,6 +713,16 @@ class EventRegisterForm extends Component {
                 </div>
               </div>
             </div>
+            {/* image */}
+            {/* <div className="image">
+              {this.state.input.eventImage && (
+                <input
+                  type="image"
+                  src={this.state.input.eventImage.name}
+                  alt="image"
+                />
+              )}
+            </div> */}
             <div style={{ marginTop: "20px", textAlign: "center" }}>
               <Button
                 id="submitButton"
@@ -729,3 +741,5 @@ class EventRegisterForm extends Component {
 }
 
 export default EventRegisterForm;
+
+// let formdata = new FormData(); formdata.append('imageKoKey', imagefile) formdata.append('eventTitle', 'Geda Show')
