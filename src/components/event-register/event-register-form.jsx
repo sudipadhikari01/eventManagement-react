@@ -31,7 +31,7 @@ class EventRegisterForm extends Component {
       eventDate: "",
       eventFrom: null,
       eventTo: null,
-      eventImage: null,
+      eventImage: "",
       eventDescription: "",
       organizerName: "",
       organizerDescription: "",
@@ -290,7 +290,7 @@ class EventRegisterForm extends Component {
     if (eventImage) {
       console.log("event image is " + eventImage);
       // image = eventImage.name;
-      fd.append("image", eventImage, eventImage.name);
+      fd.append("eventImage", eventImage, eventImage.name);
     } else {
     }
 
@@ -320,8 +320,13 @@ class EventRegisterForm extends Component {
       eventTopic
     };
     fd.append("eventForm", formData);
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data"
+      }
+    };
     await axios
-      .post("http://localhost:8080/api/event-registration", fd)
+      .post("http://localhost:8080/api/event-registration", fd, config)
       .then(response => {
         console.log("response from server is ", response.data);
         const data = response.data;
@@ -343,7 +348,7 @@ class EventRegisterForm extends Component {
           Enter Details To Register an Event
         </h3>
         <div className="container">
-          <Form onSubmit={this.handleSubmit}>
+          <Form onSubmit={this.handleSubmit} enctype="multipart/form-data">
             <Form.Group controlId="eventTitle">
               <h5>1.Event Details</h5>
               <Form.Label>Event Title*</Form.Label>
