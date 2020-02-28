@@ -19,18 +19,33 @@ class LatestEvent extends Component {
     }
   };
 
-  componentDidMount() {
-    axios.get("http://localhost:8080/api/event-registration").then(response => {
-      if (response.data.status === "success") {
-        console.log("response is ", response);
-        this.setState({ events: response.data.data });
-      }
+  componentDidMount = async () => {
+    console.log("a");
+    await axios
+      .get("http://localhost:8080/api/event-registration")
+      .then(response => {
+        if (response.data.status === "success") {
+          console.log("response is ", response.data);
+          this.setState({ events: response.data.data });
+        }
 
-      // console.log("events is ", this.state.events[1].eventImage);
-    });
-  }
+        console.log("events is ", this.state.events);
+        console.log(this.state.events[0].eventImage);
+      })
+      .catch(error => {
+        console.log("error:", error);
+      });
+  };
+
+  handleClick = event => {
+    console.log("handle test clicked");
+    console.log("handle click", this.state.events[0].eventImage);
+  };
 
   render() {
+    const test = this.state.events || [];
+    // console.log(this.state.events[0] || {}, "terst2");
+    console.log("from renderer test ", test.eventTitle);
     return (
       <div>
         <div style={this.style.backgroundStyle}></div>
@@ -45,7 +60,12 @@ class LatestEvent extends Component {
           <div className="row" style={{ marginTop: "20px" }}>
             <div className="col-md-4 col-sm-4">
               <Card>
-                <Card.Img variant="top" src="holder.js/100px180" />
+                {test.length > 0 && (
+                  <Card.Img
+                    variant="top"
+                    src={`${this.state.events[0].eventImage}`}
+                  />
+                )}
                 <Card.Body>
                   <Card.Title>Card Title</Card.Title>
                   <Card.Text>
@@ -85,12 +105,6 @@ class LatestEvent extends Component {
               </Card>
             </div>
           </div>
-
-          {/* <div>
-            {this.state.events && (
-              <input type="file" src={this.state.events[1].eventImage} />
-            )}
-          </div> */}
         </div>
       </div>
     );
