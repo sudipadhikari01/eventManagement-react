@@ -10,3 +10,7 @@ export default RegisterEvent;
 //  const fd = new FormData(){
 //   fd.append('image',this.state.input.eventImage,this.state.input.eventImage.name);
 // }
+
+
+
+// const 

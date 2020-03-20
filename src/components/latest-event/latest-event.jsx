@@ -42,6 +42,12 @@ class LatestEvent extends Component {
     console.log("handle click", this.state.events[0].eventImage);
   };
 
+  // handle click
+  handleClick = async () => {
+    console.log("handcle button clicked");
+    await axios.get("");
+  };
+
   render() {
     const test = this.state.events || [];
     // console.log(this.state.events[0] || {}, "terst2");
@@ -112,3 +118,5 @@ class LatestEvent extends Component {
 }
 
 export default LatestEvent;
+
+//
